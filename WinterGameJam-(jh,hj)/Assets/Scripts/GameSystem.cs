@@ -6,8 +6,8 @@ public class GameSystem : MonoBehaviour
 {
     public static GameSystem instance;
     public bool dragging;
-    public string Matchcorrecta;
-    public string Matchcorrectb;
+    public int Matchcorrecta;
+    public int Matchcorrectb;
     [SerializeField] GameObject correctParticle;
     [SerializeField] GameObject incorrectParticle;
     public float time=0;
