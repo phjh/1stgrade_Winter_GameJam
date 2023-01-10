@@ -7,30 +7,25 @@ using UnityEngine.UI;
 
 public class TimeLimit : MonoBehaviour
 {
-    GameSystem instance;
     float time;
-    float limitedTime = 5f;  //제한시간
+    float limitedTime = 30f;  //제한시간
     bool pause;
     [SerializeField] TextMeshProUGUI timeLimit;
     [SerializeField] Slider slider;
-    private void Awake()
-    {
-        instance = GameSystem.instance;
-    }
     void Start()
     {
-        pause = instance.ispause;
         slider.value = 1;
     }
     void Update()
     {
+        pause = GameSystem.instance.ispause;
         if (!pause)
         {
             timeLimit.text = $"Left Time : {(limitedTime-time).ToString("N3")}";
             slider.value -= Time.deltaTime/limitedTime;
             if(time+Time.deltaTime > limitedTime)
             { 
-                SceneManager.LoadScene("MainMenu"); Debug.Log("End"); 
+                SceneManager.LoadScene("MainMenu");
             }
             else if (time < limitedTime) time += Time.deltaTime;
         }

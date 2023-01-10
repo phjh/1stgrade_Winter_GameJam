@@ -60,10 +60,7 @@ public class DragAndDrop : MonoBehaviour//,IBeginDragHandler,IDragHandler,IEndDr
     //{
     //    this.rectTransform = startrectTransform;
     //}
-    public int unitnum;
     bool moving;
-    float startPosX;
-    float startPosY;
     Vector3 resetPosition;
     private void Start()
     {
@@ -77,7 +74,7 @@ public class DragAndDrop : MonoBehaviour//,IBeginDragHandler,IDragHandler,IEndDr
             mousePos = Input.mousePosition;
             mousePos = Camera.main.ScreenToWorldPoint(mousePos);
 
-            this.gameObject.transform.localPosition = new Vector3(mousePos.x - startPosX, mousePos.y - startPosY, this.gameObject.transform.localPosition.z);
+            this.gameObject.transform.position = new Vector3(mousePos.x, mousePos.y, 0);
         }
     }
     private void OnMouseDown()
@@ -87,9 +84,6 @@ public class DragAndDrop : MonoBehaviour//,IBeginDragHandler,IDragHandler,IEndDr
             Vector3 mousePos;
             mousePos = Input.mousePosition;
             mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-
-            startPosX = mousePos.x - this.transform.localPosition.x;
-            startPosY = mousePos.y - this.transform.localPosition.y;
 
             moving = true;
         }
@@ -105,14 +99,17 @@ public class DragAndDrop : MonoBehaviour//,IBeginDragHandler,IDragHandler,IEndDr
     }
     void Checker(Collision2D other)
     {
-        if (this.gameObject.tag == other.transform.tag)
+        //this.transform.localPosition = resetPosition;
+        //other.gameObject.tag = this.gameObject.tag;
+        //GameSystem.instance.SetSprite(other.gameObject);
+        if (other.gameObject.tag == this.gameObject.tag)
         {
-            this.transform.position = resetPosition;
-            Debug.Log("succus");
+            this.transform.localPosition = resetPosition;
+            GameSystem.instance.SetSprite(other.gameObject);
         }
         else
         {
-            this.transform.position = resetPosition;
+            this.transform.localPosition = resetPosition;
         }
     } 
 }
