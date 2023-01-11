@@ -13,10 +13,12 @@ public class GameSystem : MonoBehaviour
     public float time=0;
     public bool ispause=false;
     [SerializeField] GameObject cameramove;
-    int correct;
+    public int correct=0;
     public GameObject[] maps;
-    List<int> distinct;
+    //List<int> distinct;
     [SerializeField] GameObject normal, pause, ranking;
+    public float limittime=4;
+    public bool timeset=false;
     //[SerializeField] GameObject[] transitions;
     //[SerializeField] GameObject Light;
     //int leftSprites;
@@ -48,43 +50,29 @@ public class GameSystem : MonoBehaviour
         //    leftSprites++;
         //}
     }
-    public void SetSprite(GameObject map)
+    public void SetSprite(GameObject map,string ttag)
     {
-        map.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(map.tag);
-        if (correct >= maps.Length)
-        {
-            return;
-        }
-        else
-            cameramove.transform.position = maps[Distinct(Random.Range(0, maps.Length))].transform.position;
+        map.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(ttag);
+        correct++;
+        //else
+        //    cameramove.transform.position = maps[Distinct(Random.Range(0, maps.Length))].transform.position;
         //= new Vector3(cameramove.transform.localScale.x+correct, cameramove.transform.localScale.y + correct, cameramove.transform.localScale.z + correct);
     }
-    int Distinct(int rand)
-    {
-        int count = distinct.Count;
-        distinct[distinct.Count] = rand;
-        distinct.Distinct();
-        if(count == distinct.Count)
-        {
-            return Distinct(Random.Range(0, maps.Length));
-        }
-        else
-        {
-            Debug.Log($"{rand}, {count}");
-            return rand;
-        }
-    }
-    public float returnSecond(float second)
-    {
-        if (second >= 1.5f)
-        {
-            return second -= 0.05f;
-        }
-        else
-        {
-            return second;
-        }
-    }
+    //int Distinct(int rand)
+    //{
+    //    int count = distinct.Count;
+    //    distinct[distinct.Count] = rand;
+    //    distinct.Distinct();
+    //    if(count == distinct.Count)
+    //    {
+    //        return Distinct(Random.Range(0, maps.Length));
+    //    }
+    //    else
+    //    {
+    //        Debug.Log($"{rand}, {count}");
+    //        return rand;
+    //    }
+    //}
     public void Ranking()
     { 
         ranking.SetActive(true);

@@ -62,6 +62,7 @@ public class DragAndDrop : MonoBehaviour//,IBeginDragHandler,IDragHandler,IEndDr
     //}
     bool moving;
     Vector3 resetPosition;
+    AnswerTag answer;
     private void Start()
     {
         resetPosition = this.transform.localPosition;
@@ -94,23 +95,45 @@ public class DragAndDrop : MonoBehaviour//,IBeginDragHandler,IDragHandler,IEndDr
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if(!moving)
-        Checker(collision);
+        if (!moving)
+            Checker(collision);
+    }
+    void Checker()
+    {
+        this.transform.localPosition = resetPosition;
     }
     void Checker(Collision2D other)
     {
         //this.transform.localPosition = resetPosition;
         //other.gameObject.tag = this.gameObject.tag;
         //GameSystem.instance.SetSprite(other.gameObject);
-        if (other.gameObject.tag == this.gameObject.tag)
+        answer = other.gameObject.GetComponent<AnswerTag>();
+        if (answer.Return(this.gameObject.tag))
         {
             this.transform.localPosition = resetPosition;
-            GameSystem.instance.SetSprite(other.gameObject);
+            GameSystem.instance.correct++;
+            GameSystem.instance.SetSprite(other.gameObject,this.gameObject.tag);
+            TimeLimit.tInstance.Correct();
         }
         else
         {
             this.transform.localPosition = resetPosition;
-            GameSystem.instance.Ranking();
+            //GameSystem.instance.Ranking();
+            Debug.Log("incorrect");
         }
     } 
+    bool answerchecker(string tag)
+    {
+        return tag switch
+        {
+            "AND" => true,
+            "OR" => true,
+            "NOT" => true,
+            "NAND" => true,
+            "NOR" => true,
+            "XOR" =>true,
+            "XNOR"=>true,
+            _=>false
+        };
+    }
 }
