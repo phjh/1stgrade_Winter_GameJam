@@ -110,6 +110,7 @@ public class DragAndDrop : MonoBehaviour//,IBeginDragHandler,IDragHandler,IEndDr
         else
         {
             this.transform.localPosition = resetPosition;
+            GameSystem.instance.Ranking();
         }
     } 
 }

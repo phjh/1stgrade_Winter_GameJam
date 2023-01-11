@@ -5,10 +5,11 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
 
+
 public class TimeLimit : MonoBehaviour
 {
     float time;
-    float limitedTime = 30f;  //제한시간
+    float limitedTime = 4f;  //제한시간
     bool pause;
     [SerializeField] TextMeshProUGUI timeLimit;
     [SerializeField] Slider slider;
@@ -21,11 +22,12 @@ public class TimeLimit : MonoBehaviour
         pause = GameSystem.instance.ispause;
         if (!pause)
         {
-            timeLimit.text = $"Left Time : {(limitedTime-time).ToString("N3")}";
+            timeLimit.text = $"{(limitedTime-time).ToString("N3")}";
+            //timeLimit.text = $"Left Time : {(limitedTime - time).ToString("N3")}";
             slider.value -= Time.deltaTime/limitedTime;
             if(time+Time.deltaTime > limitedTime)
-            { 
-                SceneManager.LoadScene("MainMenu");
+            {
+                GameSystem.instance.Ranking();
             }
             else if (time < limitedTime) time += Time.deltaTime;
         }
