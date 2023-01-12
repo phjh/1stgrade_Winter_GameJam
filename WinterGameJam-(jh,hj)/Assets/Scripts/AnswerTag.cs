@@ -14,8 +14,7 @@ public class AnswerTag : MonoBehaviour
     bool transformed=false;
     public bool Return(string name)
     {
-        if (!transformed)
-        {
+
             transformed=true;
             return name switch
             {
@@ -28,10 +27,6 @@ public class AnswerTag : MonoBehaviour
                 "XNOR" => XNOR,
                 _ => false
             };
-        }
-        else
-        {
-            return false;
-        }
+        
     }
 }

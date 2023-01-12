@@ -6,6 +6,7 @@ public class BulbSys : MonoBehaviour
 {
     public static BulbSys bulbinstance;
     public GameObject turnonEffect;
+    [SerializeField] GameObject cleartxt;
     private void Awake()
     {
         bulbinstance = this;
@@ -19,13 +20,19 @@ public class BulbSys : MonoBehaviour
     {
         if (GameSystem.instance.ranking.activeInHierarchy)
         {
-            Invoke("LightOnoff", 0.2f);
+            Invoke("LightOnoff", 1f);
+            Invoke("Changetoclear", 2f);
         }
     }
     void LightOnoff()
     {
+        cleartxt.SetActive(true);
         turnonEffect.SetActive(false);
         turnonEffect.SetActive(true);
         Invoke("LightOnoff", 1);
+    }
+    void Changetoclear()
+    {
+        GameSystem.instance.StageSelect();
     }
 }

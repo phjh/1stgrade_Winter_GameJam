@@ -8,6 +8,7 @@ public class StageclearSys : MonoBehaviour
     Vector3 resetPosition;
     AnswerTag answer;
     [SerializeField] GameObject Clear;
+    [SerializeField] GameObject cleartxt;
     //[SerializeField] List<GameObject> Answers;
     private void Start()
     {
@@ -62,6 +63,7 @@ public class StageclearSys : MonoBehaviour
                 BulbSys.bulbinstance.BecomeTrue();
                 GameSystem.instance.SetSprite(other.gameObject, this.gameObject.tag);
                 Clear.SetActive(true);
+                cleartxt.SetActive(true);
             }
             else
             {
