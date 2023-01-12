@@ -12,7 +12,7 @@ public class StageSys : MonoBehaviour
     { 
         Setting.mapSet.NRDCompiler(Stagenum);
         mapbulb.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("off");
-        trangision.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("mapimage");
+        trangision.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("blank");
         mapbulb.GetComponent<BulbSys>().turnonEffect.SetActive(false);
     }   
 }
