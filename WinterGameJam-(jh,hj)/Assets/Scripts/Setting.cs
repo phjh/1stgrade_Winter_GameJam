@@ -18,8 +18,11 @@ public class Setting : MonoBehaviour
         if (value)
         {
             int rand = Random.Range(0, mappos.Count);
-            cam.transform.position = mappos[rand].position;
-            mappos.RemoveAt(rand);
+            for (int i = 0; i < mappos.Count-1; i++)
+            {
+                maps[i].SetActive(false);
+            }
+            maps[rand].SetActive(true);
         }
         else
         {
