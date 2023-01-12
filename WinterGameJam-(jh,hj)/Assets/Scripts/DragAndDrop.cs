@@ -113,6 +113,7 @@ public class DragAndDrop : MonoBehaviour//,IBeginDragHandler,IDragHandler,IEndDr
             this.transform.localPosition = resetPosition;
             GameSystem.instance.correct++;
             GameSystem.instance.SetSprite(other.gameObject,this.gameObject.tag);
+            BulbSys.bulbinstance.BecomeTrue();
             TimeLimit.tInstance.Correct();
         }
         else

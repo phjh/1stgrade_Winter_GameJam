@@ -16,26 +16,29 @@ public class GameSystem : MonoBehaviour
     public int correct=0;
     public GameObject[] maps;
     //List<int> distinct;
-    [SerializeField] GameObject normal, pause, ranking;
+    public GameObject normal, pause, ranking;
     public float limittime=4;
     public bool timeset=false;
+    [SerializeField] List<GameObject> ActiveMaps;
+    [SerializeField] GameObject Stageselect;
     //[SerializeField] GameObject[] transitions;
     //[SerializeField] GameObject Light;
     //int leftSprites;
     private void Awake()
     {
         instance = this;
-        normal.SetActive(true);
-        pause.SetActive(false);
-        ranking.SetActive(false);
+            normal.SetActive(true);
+            pause.SetActive(false);
+            ranking.SetActive(false);
     }
     private void Update()
     {
+        ispause = pause.activeInHierarchy;
         if (!ispause)
         {
             time+=Time.deltaTime;
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape)&&!Stageselect.activeInHierarchy)
         {
             ispause = true;
             normal.SetActive(false);
@@ -102,4 +105,16 @@ public class GameSystem : MonoBehaviour
     //    cam.DOOrthoSize(cam.orthographicSize, 1);
     //    Light.SetActive(false);
     //}
+    public void SetActive(int stagenum)
+    {
+        if(stagenum <= ActiveMaps.Count)
+        {
+            ActiveMaps[stagenum].SetActive(!ActiveMaps[stagenum]);
+        }
+    }
+    public void StageSelect()
+    {
+        Stageselect.SetActive(true) ;
+        ranking.SetActive(false) ;
+    }
 }

@@ -11,18 +11,27 @@ public class AnswerTag : MonoBehaviour
     public bool NOR=false;
     public bool XOR=false;
     public bool XNOR=false;
+    bool transformed=false;
     public bool Return(string name)
     {
-        return name switch
+        if (!transformed)
         {
-            "AND" => AND,
-            "OR" => OR,
-            "NOT"=>NOT,
-            "NAND" => NAND,
-            "NOR" => NOR,
-            "XOR" => XOR,
-            "XNOR" => XNOR,
-            _ => false
-        };
+            transformed=true;
+            return name switch
+            {
+                "AND" => AND,
+                "OR" => OR,
+                "NOT" => NOT,
+                "NAND" => NAND,
+                "NOR" => NOR,
+                "XOR" => XOR,
+                "XNOR" => XNOR,
+                _ => false
+            };
+        }
+        else
+        {
+            return false;
+        }
     }
 }

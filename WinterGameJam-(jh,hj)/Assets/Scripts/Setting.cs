@@ -10,7 +10,9 @@ public class Setting : MonoBehaviour
         mapSet = this;
     }
     public List<Transform> mappos = new List<Transform>();
+    public List<GameObject> maps = new List<GameObject>();
     [SerializeField] Camera cam;
+    [SerializeField] GameObject Stage;
     public void Compiler(bool value)
     {
         if (value)
@@ -23,5 +25,10 @@ public class Setting : MonoBehaviour
         {
             GameSystem.instance.Ranking();
         }
+    }
+    public void NRDCompiler(int mapposnum)
+    {
+        maps[mapposnum].SetActive(true);
+        Stage.SetActive(false);
     }
 }

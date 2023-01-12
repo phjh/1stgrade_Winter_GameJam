@@ -27,7 +27,7 @@ public class TimeLimit : MonoBehaviour
         pause = GameSystem.instance.ispause;
         if (!pause)
         {
-            timeLimit.text = $"{(limitedTime-time).ToString("N3")}";
+            timeLimit.text = $"남은 시간 : {(limitedTime-time).ToString("N3")}";
             //timeLimit.text = $"Left Time : {(limitedTime - time).ToString("N3")}";
             slider.value -= Time.deltaTime/limitedTime;
             if (time + Time.deltaTime > limitedTime)
@@ -39,7 +39,7 @@ public class TimeLimit : MonoBehaviour
     }
     public void Correct()
     {
-        limitedTime -= 0.05f;
+        limitedTime -= 0.1f;
         slider.value = 1;
         time = 0;
     }
